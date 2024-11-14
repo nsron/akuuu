@@ -108,9 +108,9 @@
             max-width: 800px;
             text-align: center;
             animation: modalFadeIn 0.5s ease-in-out;
-            margin: 20px auto; /* Jarak untuk membuat scroll tampak lebih baik */
-            max-height: 90vh; /* Batas tinggi maksimal */
-            overflow-y: auto; /* Scroll dalam konten modal */
+            margin: 20px auto;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-content .videos {
@@ -168,47 +168,92 @@
         <button onclick="showModal()">Tampilkan Video</button>
     </div>
 
-    <!-- Modal Overlay -->
-    <div class="modal" id="modal">
+    <!-- Modal Overlay 1 -->
+    <div class="modal" id="modal1">
         <div class="modal-content">
             <h2>Kenangan Indah</h2>
             <p>Kenangan indah yang bisa dikenang kembali.</p>
 
             <div class="videos">
-                <!-- Video 1 -->
+                <!-- Video 1 sampai 3 -->
                 <video autoplay muted loop playsinline>
                     <source src="copy_AE9115C8-72BF-4EF8-A36F-D6416D9D145B.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <!-- Video 2 -->
                 <video autoplay muted loop playsinline>
                     <source src="WhatsApp Video 2024-11-14 at 14.13.18.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <!-- Video 3 -->
                 <video autoplay muted loop playsinline>
                     <source src="WhatsApp Video 2024-11-14 at 14.10.07.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
 
-            <button class="close-btn" onclick="closeModal()">Tutup</button>
+            <button class="close-btn" onclick="showModal2()">Lanjutkan</button>
+        </div>
+    </div>
+
+    <!-- Modal Overlay 2 (Modal Kedua) -->
+    <div class="modal" id="modal2">
+        <div class="modal-content">
+            <h2>Lebih Banyak Kenangan</h2>
+            <p>Kenangan-kenangan lainnya untuk dirayakan.</p>
+
+            <div class="videos">
+                <!-- Video 4 sampai 11 -->
+                <video autoplay muted loop playsinline>
+                    <source src="1.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video autoplay muted loop playsinline>
+                    <source src="2.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video autoplay muted loop playsinline>
+                    <source src="3.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video autoplay muted loop playsinline>
+                    <source src="4.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video autoplay muted loop playsinline>
+                    <source src="5.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video autoplay muted loop playsinline>
+                    <source src="6.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video autoplay muted loop playsinline>
+                    <source src="7.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video autoplay muted loop playsinline>
+                    <source src="9.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <button class="close-btn" onclick="closeModal2()">Tutup</button>
         </div>
     </div>
 
     <script>
-        // Fungsi untuk menampilkan modal
         function showModal() {
-            const modal = document.getElementById('modal');
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Menonaktifkan scroll di body saat modal terbuka
+            document.getElementById('modal1').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
-        // Fungsi untuk menutup modal
-        function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Mengaktifkan kembali scroll di body saat modal tertutup
+        function showModal2() {
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'flex';
+        }
+
+        function closeModal2() {
+            document.getElementById('modal2').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
     </script>
 </body>
