@@ -18,29 +18,9 @@
             background: linear-gradient(135deg, #1a1c3d, #4b3f72, #845ec2);
             font-family: 'Poppins', sans-serif;
             perspective: 1000px;
-            overflow: auto; /* Biarkan halaman bisa discroll */
-        }
-
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle var(--duration) infinite;
-            opacity: 0;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0; transform: translateY(0); }
-            50% { opacity: 0.8; transform: translateY(-20px); }
+            overflow: auto;
+            flex-direction: column;
+            padding: 20px;
         }
 
         .container {
@@ -56,8 +36,8 @@
             max-width: 600px;
             width: 90%;
             z-index: 1;
-            overflow: auto; /* Tambahkan overflow auto jika ingin konten di container bisa scroll */
-            max-height: 90vh; /* Membatasi tinggi container agar bisa scroll jika diperlukan */
+            overflow: auto;
+            max-height: 90vh;
         }
 
         @keyframes float {
@@ -87,130 +67,143 @@
             opacity: 0.9;
         }
 
-        .cake-container {
-            position: relative;
-            height: 200px;
-            margin: 2rem 0;
-            transform-style: preserve-3d;
-        }
-
-        .cake {
-            font-size: 7rem;
+        button {
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            border: none;
+            color: white;
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: cakeFloat 3s ease-in-out infinite;
-            position: relative;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
         }
 
-        @keyframes cakeFloat {
-            0%, 100% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
         }
 
-        .gift {
-            font-size: 5rem;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: giftBounce 2s ease-in-out infinite;
-            margin-top: 2rem;
-            display: inline-block;
-        }
-
-        @keyframes giftBounce {
-            0%, 100% { transform: scale(1) rotate(0); }
-            50% { transform: scale(1.1) rotate(-5deg); }
-        }
-
-        .image-container {
-            margin-top: 2rem;
+        /* Modal (Overlay) */
+        .modal {
             display: none;
-            justify-content: center;
-        }
-
-        .image-container img {
+            position: fixed;
+            top: 450px;
+            left: 0;
             width: 100%;
-            max-width: 400px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
         }
 
+        .modal-content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+            animation: modalFadeIn 0.5s ease-in-out;
+            margin-top: 20px; /* Menambahkan margin atas untuk memberi ruang */
+        }
+
+        .modal-content .videos {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px; /* Menambahkan jarak antara teks dan video */
+        }
+
+        .modal-content video {
+            width: 100%;
+            height: auto;
+            margin: 0; /* Menghilangkan jarak antara video */
+            border-radius: 10px;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .close-btn {
+            background: #ff6b6b;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(255,255,255,0.4);
+        }
+
+        @keyframes modalFadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
     </style>
 </head>
 <body>
-    <div class="stars"></div>
     <div class="container">
-        <div class="cake-container">
-            <div class="cake" onclick="blowCandles()">🎂</div>
-        </div>
         <h1>✨ Selamat Ulang Tahun! ✨</h1>
         <div class="message">
             <p>Di hari yang istimewa ini<br>
-            Semoga segala impian dan harapanmu menjadi kenyataan<br>
-            Panjang umur, sehat selalu, dan bahagia selamanya<br>
-            Semoga menjadi pribadi yang semakin bersinar dan membanggakan<br>
-            Tuhan memberkatimu selalu! 🌟</p>
+            Semoga segala impian dan harapanmu menjadi kenyataan!<br>
+            Panjang umur, sehat selalu, dan bahagia selamanya!</p>
         </div>
-        <button onclick="showImage()">Tampilkan Foto</button>
+        <button onclick="showModal()">Tampilkan Video</button>
+    </div>
 
-        <div class="image-container">
-            <img id="birthdayImage" src="https://via.placeholder.com/400" alt="Selamat Ulang Tahun">
+    <!-- Modal Overlay -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2>Kenangan Indah</h2>
+            <p>Momen yang tak terlupakan bersama orang tersayang!</p>
+
+            <div class="videos">
+                <!-- Video 1 -->
+                <video autoplay muted loop>
+                    <source src="copy_AE9115C8-72BF-4EF8-A36F-D6416D9D145B.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <!-- Video 2 -->
+                <video autoplay muted loop>
+                    <source src="WhatsApp Video 2024-11-14 at 14.10.07.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <!-- Video 3 -->
+                <video autoplay muted loop>
+                    <source src="WhatsApp Video 2024-11-14 at 14.13.18.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <button class="close-btn" onclick="closeModal()">Tutup</button>
         </div>
-        
     </div>
 
     <script>
-        let candlesBlown = false;
-        const wishes = [
-            "✨ Semoga semua mimpimu terwujud!",
-            "🌟 Bahagia dan sukses selalu!",
-            "💫 Diberkati di setiap langkahmu!",
-            "🎯 Semua cita-citamu tercapai!",
-            "💝 Selalu dilimpahi kebahagiaan!"
-        ];
-
-        // Fungsi untuk menampilkan gambar
-        function showImage() {
-            const imageContainer = document.querySelector('.image-container');
-            const birthdayImage = document.getElementById('birthdayImage');
-            
-            // Mengubah gambar (ubah URL gambar dengan gambar yang Anda inginkan)
-            birthdayImage.src = 'https://via.placeholder.com/400?text=Selamat+Ulang+Tahun!';
-            
-            // Menampilkan gambar setelah klik
-            imageContainer.style.display = 'flex';
+        // Fungsi untuk menampilkan modal
+        function showModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'flex'; // Tampilkan modal
         }
 
-        function createStars() {
-            const starsContainer = document.querySelector('.stars');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.width = `${Math.random() * 3}px`;
-                star.style.height = star.style.width;
-                star.style.setProperty('--duration', `${2 + Math.random() * 3}s`);
-                starsContainer.appendChild(star);
-            }
+        // Fungsi untuk menutup modal
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none'; // Sembunyikan modal
         }
-
-        function blowCandles() {
-            if (!candlesBlown) {
-                const cake = document.querySelector('.cake');
-                cake.style.transform = 'scale(1.3) rotate(10deg)';
-                setTimeout(() => {
-                    cake.textContent = '🍰';
-                    cake.style.transform = '';
-                }, 500);
-                
-                const wish = wishes[Math.floor(Math.random() * wishes.length)];
-                alert(wish);
-                candlesBlown = true;
-            }
-        }
-
-        // Initialize
-        createStars();
     </script>
 </body>
 </html>
