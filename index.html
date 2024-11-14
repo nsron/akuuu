@@ -106,7 +106,7 @@
             max-width: 800px;
             text-align: center;
             animation: modalFadeIn 0.5s ease-in-out;
-            margin-top: 20px; /* Menambahkan margin atas untuk memberi ruang */
+            margin-top: 20px;
         }
 
         .modal-content .videos {
@@ -114,13 +114,13 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin-top: 20px; /* Menambahkan jarak antara teks dan video */
+            margin-top: 20px;
         }
 
         .modal-content video {
             width: 100%;
             height: auto;
-            margin: 0; /* Menghilangkan jarak antara video */
+            margin: 0;
             border-radius: 10px;
         }
 
@@ -161,28 +161,28 @@
             Semoga segala impian dan harapan menjadi kenyataan!<br>
             Panjang umur, sehat selalu, dan bahagia selamanya!</p>
         </div>
-        <button onclick="showModal()">Jare Njaluk Foto</button>
+        <button onclick="showModal()">Tampilkan Video</button>
     </div>
 
     <!-- Modal Overlay -->
     <div class="modal" id="modal">
         <div class="modal-content">
             <h2>Kenangan Indah</h2>
-            <p>Iki loh foto e</p>
+            <p>Kenangan indah yang bisa dikenang kembali.</p>
 
             <div class="videos">
                 <!-- Video 1 -->
-                <video autoplay muted loop>
+                <video autoplay muted loop playsinline>
                     <source src="copy_AE9115C8-72BF-4EF8-A36F-D6416D9D145B.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <!-- Video 2 -->
-                <video autoplay muted loop>
+                <video autoplay muted loop playsinline>
                     <source src="WhatsApp Video 2024-11-14 at 14.10.07.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <!-- Video 3 -->
-                <video autoplay muted loop>
+                <video autoplay muted loop playsinline>
                     <source src="WhatsApp Video 2024-11-14 at 14.13.18.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -196,14 +196,27 @@
         // Fungsi untuk menampilkan modal
         function showModal() {
             const modal = document.getElementById('modal');
-            modal.style.display = 'flex'; // Tampilkan modal
+            modal.style.display = 'flex';
         }
 
         // Fungsi untuk menutup modal
         function closeModal() {
             const modal = document.getElementById('modal');
-            modal.style.display = 'none'; // Sembunyikan modal
+            modal.style.display = 'none';
         }
+
+        // Deteksi perangkat seluler dan nonaktifkan autoplay di seluler
+        function isMobile() {
+            return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        }
+
+        document.querySelectorAll("video").forEach((video) => {
+            if (isMobile()) {
+                video.autoplay = false;
+            } else {
+                video.play();
+            }
+        });
     </script>
 </body>
 </html>
